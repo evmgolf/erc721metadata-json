@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: BSD-3-Clause
 pragma solidity 0.8.13;
 
+import {DataURI} from "uri/Data.sol";
+
 library ERC721MetadataJSON {
+  using DataURI for bytes;
+
   function json(bytes memory name, bytes memory description, bytes memory image) internal pure returns (bytes memory) {
     return bytes.concat(
         "{\"name\":\"",
@@ -31,5 +35,9 @@ library ERC721MetadataJSON {
       }
     }
     text = bytes.concat(text, "]}");
+  }
+
+  function uriBase64(bytes memory _text) internal pure returns (bytes memory) {
+    return _text.dataURIBase64("application/json");
   }
 }

@@ -16,4 +16,8 @@ contract ERC721MetadataJSONTest is Test {
       assertGt(ERC721MetadataJSON.json(name, description, image, keys, values).length, 0);
     }
   }
+
+  function testOutputsSomethingURI(bytes calldata _text) public {
+    assertGt(ERC721MetadataJSON.uriBase64(_text).length, 0);
+  }
 }
